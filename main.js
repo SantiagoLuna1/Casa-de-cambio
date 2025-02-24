@@ -42,6 +42,7 @@ function mostrarListadoMonedas(monedas) {
             }
             $item.classList.add('active');
             actualizar();
+            
         });
         $lista.appendChild($item);
     });
@@ -50,9 +51,9 @@ function mostrarListadoMonedas(monedas) {
 }
 
 function obtenerMonedaSeleccionada() {
-    const $activeItem = document.querySelector('list-group-item.active');
+    const $activeItem = document.querySelector('.list-group-item.active');
     if ($activeItem) {
-        return $activeItem.dataset.base;
+        return document.querySelector('.list-group-item.active').dataset.base;
     }
 
     return undefined;
@@ -75,6 +76,12 @@ function actualizar() {
         });
 }
 
+function configurarInputFecha() {
+    const $fecha = document.querySelector('#fecha');
+    const hoy = (new Date()).toISOString().split('T') [0];
+    $fecha.setAttribute('max', hoy);
+    $fecha.addEventListener('change', actualizar);
+}
 
 function inicializar() {
     obtenerMonedas().then((monedas) => {
