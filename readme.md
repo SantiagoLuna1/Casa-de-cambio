@@ -11,7 +11,7 @@ Este proyecto es una **Casa de Cambio en línea** que permite consultar el tipo 
 
 ## Requisitos
 
-- **Clave de API** de Exchange Rates API para realizar las consultas.
+- **Clave de API** de Currencyapi para realizar las consultas.
   
 ### Cómo obtener tu clave de API
 
