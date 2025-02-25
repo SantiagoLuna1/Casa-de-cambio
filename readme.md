@@ -1,6 +1,6 @@
 # Casa de Cambio
 
-Este proyecto es una **Casa de Cambio en línea** que permite consultar el tipo de cambio de distintas monedas en tiempo real y en una fecha específica, utilizando la API de Exchange Rates.
+Este proyecto es una **Casa de Cambio en línea** que permite consultar el tipo de cambio de distintas monedas en tiempo real y en una fecha específica, utilizando la API de Currencyapi.
 
 ## Características
 
@@ -15,7 +15,7 @@ Este proyecto es una **Casa de Cambio en línea** que permite consultar el tipo 
   
 ### Cómo obtener tu clave de API
 
-1. Regístrate en [Exchange Rates API](https://exchangeratesapi.io/) y obtén tu clave gratuita de API.
+1. Regístrate en [Currencyapi](https://currencyapi.com/) y obtén tu clave gratuita de API.
 2. Guarda la clave en un archivo `config.js` como se explica en la sección de **Configuración** más abajo.
 
 ## Instalación
