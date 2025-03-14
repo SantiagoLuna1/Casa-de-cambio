@@ -1,24 +1,36 @@
-import { obtenerMonedas, obtenerCotizacion } from './cambios.js';
-import {
-    configurarInputFecha,
-    mostrarCotizaciones,
-    mostrarListadoMonedas,
-    obtenerFechaSeleccionada,
-    obtenerMonedaSeleccionada,
-    mostrarCartelActualizacion,
-    buscadorMonedas,
-} from './ui.js';
+import { obtenerCotizacion, obtenerMonedas } from "./api/api.js";
+import { 
+  configurarInputFecha,
+  mostrarCambios, 
+  mostrarCartelActualizacion, 
+  mostrarListadoMonedas, 
+  obtenerFechaSeleccionada,
+  obtenerMonedaSeleccionada, 
+  obtenerTipo,
+} from "./ui/ui.js";
 
-async function actualizar() {
-    mostrarCartelActualizacion();
-    const cotización = await obtenerCotizacion(obtenerMonedaSeleccionada(), obtenerFechaSeleccionada());
-    mostrarCotizaciones(cotización);
+function actualizar() {
+  mostrarCartelActualizacion();
+
+  obtenerCotizacion(obtenerTipo(), obtenerMonedaSeleccionada(), obtenerFechaSeleccionada())
+    .done(function(cotizacion) {
+      mostrarCambios(cotizacion);
+    })
+    .fail(function(error) {
+      console.error("Error al obtener la cotización:", error);
+    });
 }
 
-async function inicializar() {
-    mostrarListadoMonedas(await obtenerMonedas(), actualizar);
-    configurarInputFecha(actualizar);
-    buscadorMonedas();
+function inicializar() {
+  obtenerMonedas()
+    .done(function(monedas) {
+      mostrarListadoMonedas(monedas, actualizar);
+    })
+    .fail(function(error) {
+      console.error("Error al obtener las monedas:", error);
+    });
+
+  configurarInputFecha(actualizar);
 }
 
 inicializar();
