@@ -18,13 +18,11 @@ export function obtenerCotizacion(tipo = 'latest', base = 'USD', fecha = null) {
   }
 
   const cacheKey = `${base}_${tipo}_${fecha || ''}`;
-  console.log(localStorage.getItem(`${base}_${tipo}_${fecha || ''}`));
   const cacheData = localStorage.getItem(cacheKey);
 
   const deferred = $.Deferred(); 
 
   if (cacheData) {
-    console.log("Datos obtenidos del localStorage:", JSON.parse(cacheData));
     //si los datos están en caché resolvemos la promesa inmediatamente
     deferred.resolve(new Cotizacion(JSON.parse(cacheData)));
   } else {
@@ -37,7 +35,6 @@ export function obtenerCotizacion(tipo = 'latest', base = 'USD', fecha = null) {
       }
     })
     .done(function(data) {
-      console.log("Datos de la API recibidos:", data);
       const cotizacion = new Cotizacion(data.data);
       localStorage.setItem(cacheKey, JSON.stringify(data.data));
       deferred.resolve(cotizacion); //la promesa se resuelve con el objeto cotizacion
@@ -46,7 +43,6 @@ export function obtenerCotizacion(tipo = 'latest', base = 'USD', fecha = null) {
       deferred.reject(error); //se rechaza en caso de error
     });
   }
-  console.log("Promesa retornada:", deferred.promise());
   return deferred.promise(); //se retorna
 }
 
